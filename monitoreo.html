@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <title>Monitoreo de CO</title>
+    
+ 
+
+    <style>
+        
+        body {
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Texto en blanco */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            background-color: #222; /* Color de fondo para el contenedor */
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados para el contenedor */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra ligera */
+            grid-gap: 20px; /* Espacio entre las columnas */
+        }
+
+        h1 {
+            text-align: center;
+            grid-column: span 2; /* Span en las dos columnas */
+        }
+
+        #myChart {
+            width: 100%; /* Ancho completo del gráfico */
+            max-width: 600px; /* Máximo ancho del gráfico */
+            height: auto; /* Altura automática para mantener la proporción */
+            grid-column: 1; /* En la primera columna (izquierda) */
+        }
+
+        iframe {
+            width: 100%; /* Ancho completo de los iframes */
+            height: auto; /* Altura automática para mantener la proporción */
+            display: block; /* Mostrar como bloque para evitar espacios en blanco */
+            border: none; /* Quitar el borde de los iframes */
+        }
+
+        #iframeLeft {
+            grid-column: 1; /* En la primera columna (izquierda) */
+        }
+
+        #iframeRight {
+            grid-column: 2; /* En la segunda columna (derecha) */
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <h1>
+        Monitoreo de CO y CO2
+    </h1>
+
+    <div class="container">
+        <canvas id="myChart" style="width: 400px; height: 200px;"></canvas>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var chart; // Variable para la instancia del gráfico
+            var updateInterval = 10000; // Intervalo de actualización en milisegundos (10 segundos)
+
+            function getData() {
+                var url = "https://api.thingspeak.com/channels/2267974/fields/1,2.json?api_key=ZD41X1X4XT4XIQ48&results=1";
+
+                $.getJSON(url, function (data) {
+                    var field1Values = [];
+                    var field2Values = [];
+                    var timestamps = [];
+
+                    $.each(data.feeds, function (index, feed) {
+                        field1Values.push(feed.field1);
+                        field2Values.push(feed.field2);
+                        timestamps.push(feed.created_at)
+                    });
+
+                    // Verifica si ya se ha creado el gráfico
+                    if (chart) {
+                        // Actualiza los datos del gráfico existente
+                        chart.data.labels = timestamps;
+                        chart.data.datasets[0].data = field1Values;
+                        chart.data.datasets[1].data = field2Values;
+                        chart.update();
+                    } else {
+                        // Crea el gráfico si aún no existe
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        chart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: timestamps,
+                                datasets: [{
+                                    label: 'Monoxido de Carbono',
+                                    data: field1Values,
+                                    borderColor: '',
+                                    backgroundColor: '#84bd00',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Dioxido de Carbono',
+                                    data: field2Values,
+                                    borderColor: '',
+                                    backgroundColor: '#00205b',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Iniciar la actualización periódica de datos
+            setInterval(getData, updateInterval);
+            getData(); // Obtener datos inicialmente
+        });
+    </script>
+   <iframe width="450" height="260" style="border: 0px solid #cccccc;" src="https://thingspeak.com/channels/2267974/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+   <iframe width="450" height="260" style="border: 0px solid #cccccc;" src="https://thingspeak.com/channels/2267974/widgets/707033"></iframe>
+
+</body>
+</html>

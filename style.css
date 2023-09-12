@@ -1,0 +1,158 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+/* Estilos del video de fondo */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Estilos de la cortina de humo */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 200%, rgba(0, 0, 0, 0.5) 100%, transparent 100%);
+}
+
+/* Estilos del contenido */
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 48px;
+    color: #fff;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.login-button,
+.register-button {
+    padding: 15px 20px;
+    margin: 15px;
+    font-size: 25px;
+    background-color: #00000069; /* Cambia el color de fondo del botón */
+    color: #ffffff; /* Cambia el color del texto del botón */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover,
+.register-button:hover {
+    background-color: #0f0f0f;
+}
+
+/* Estilos de la sección de contenido */
+.page-content {
+
+    background: rgb(0, 0, 0); 
+    height: 90vh;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    
+
+}
+
+p {
+    color: #fff;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+h2 {
+    color: #fff;
+    padding-top: 30px;
+    padding-left: 150px;
+    padding-right: 150px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 15px;
+}
+
+/* Estilos de la sección de contenido */
+.page-content {
+    background: rgba(0, 0, 0,);
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+
+    display: grid; /* Utilizamos CSS Grid para las columnas */
+    grid-template-columns: 1fr 1fr; /* Divide la sección en dos columnas */
+    gap: 20px; /* Espacio entre las columnas */
+}
+
+.left-column {
+    font-weight: 100;
+    text-align: center;
+}
+
+.right-column {
+    /* Estilos para la columna de la imagen */
+    text-align: center; /* Centra la imagen */
+}
+
+.right-column img {
+    padding-top: 45px;
+    max-width: 100%; /* Ajusta el ancho de la imagen para que no se desborde */
+}
+
+footer{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    color: white;
+    background-color:#0e0e0e
+}
+
+
+
+
+
+
+
+
+
+
