@@ -1,0 +1,173 @@
+<!DOCTYPE html>  
+<html>
+    <style>
+		h1{
+			font-family: sans-serif;
+			font-size:50px
+		}
+		body{
+			background-color:#131313;
+		}
+
+
+		table{
+			
+			margin-right: 100px
+		}
+
+        td {
+            font-size: 45px;
+			color: white
+        }
+
+            /* Estilo del header */
+        header {
+            background-color: black;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        header h1 {
+            padding-left:100px;
+            font-size: 24px;
+            margin: 0;
+            font-size: 30px
+        }
+
+        /* Estilo de la navegación para que esté a la derecha */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            margin-left:800px;
+            list-style: none;
+            padding: 0;
+            display: flex; /* Utilizar flexbox para alinear los elementos de navegación a la derecha */
+        }
+
+        nav li {
+            margin-left: 20px; /* Cambiar el margen izquierdo para separar los elementos de navegación */
+        }
+
+        /* Estilo de los enlaces de navegación */
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size:20px
+        }
+
+        /* Estilo de los enlaces de navegación al pasar el cursor */
+        nav a:hover {
+            color: grey;
+        }
+
+        body h2{
+            color:white;
+            font-size:40px;
+            text-align: left;
+            font-family:sans-serif;
+            padding-left: 200px;
+            padding-top: 40px;
+        }
+
+        body h3{
+            color:white;
+            font-size:35px;
+            font-weight:1;
+            font-family:sans-serif;
+            text-align:center;
+        }
+
+
+        p{
+            text-align:left;
+            padding-left: 45px;
+        }
+
+        h4{
+            text-align:center;
+            color: white;
+        }
+
+        .btn-sensor {
+            background-color: gray; 
+            border: none;
+            color: white; 
+            border-radius: 5px; 
+            padding: 20px 150px; 
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; 
+            cursor: pointer;
+            margin-left: 200px;
+        }
+
+        .btn-conectar {
+            background-color: black; 
+            border: none;
+            color: white; 
+            border-radius: 5px; 
+            padding: 20px 50px; 
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; 
+            cursor: pointer;
+            margin-left: 200px;
+            padding-top: 15px;
+        }
+
+        .btn-sensor:hover{
+            background-color: black;
+        }
+
+        .btn-conectar:hover{
+            background-color: gray;
+        }
+
+        .page-content p{
+            padding-left: 200px;
+            color: white;
+        }
+
+        .page-content p:hover{
+            color: gray;
+        }
+
+        .btn-sensor a:link, .buttons a:visited {
+            color: inherit; /* Utiliza el color heredado del botón */
+            text-decoration: none; /* Elimina la subrayado predeterminado */
+        }
+
+    </style>  
+
+		<header>
+		<nav>
+            <a href="index.html">
+                <h1>AIRWATCH</h1>
+                </a>
+            <ul>
+                <li><a href="test_data.php">Monitoreo</a></li>
+				<li><a href="alarmas.html">Alarmas</a></li>
+                <li><a href="nosotros.html">Perfil</a></li>
+            </ul>
+		</nav>
+	</header>
+    
+    <body>
+        <div class="page-content">
+            <h2>Se</h2>
+            <button class="btn-sensor"><a href="test_data.php">MQ-7</a></button><br><br><br>
+            <button class="btn-conectar">Conectar Sensor</button><br><br><br>
+            <p>No aparece tu sensor? Contacta a tu administrador</p>
+        </div>
+    </body>  
+</html>
+
