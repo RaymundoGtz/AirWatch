@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/iniciosesion.css">
+    <title>AIRWATCH</title>
+</head>
+<style>
+    .tittle{
+        font-family: sans-serif;
+    }
+
+    h2 {
+        font-family: sans-serif;
+    }
+
+    .label{
+        font-family: sans-serif;
+    }
+</style>
+<body>
+    <div class="fondo">
+           <video muted autoplay loop>
+        <source src="img\fondo.mp4" type="video/mp4">
+         </video>
+        <div class="capa"></div> 
+    </div>
+
+    <form class="form">
+        <h2 class="form_title">Ingresa</h2>
+        <div class="form_container">
+            
+            <div class="form_group">
+                <input type="text" id="correo" class="form_input" placeholder="">
+                <label for="correo" class="form_label">Correo</label>
+                <span class="form_line"></span>
+            </div>
+            <div class="form_group">
+                <input type="text" id="contraseña" class="form_input" placeholder="">
+                <label for="contraseña" class="password">Contraseña</label>
+                <span class="form_line"></span>
+            </div>
+            
+
+            <input type="submit" class="form_submit" value="Ingresar">
+            <input type="submit" class="form_submit" value="Ingresar como administrador">
+        </div>
+    </form>
+
+</body>
+</html>
