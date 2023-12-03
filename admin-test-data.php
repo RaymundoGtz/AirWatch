@@ -178,11 +178,11 @@
         <nav>
             <ul>
                 
-                <li><a href="sensores.html" class="current">Monitoreo</a></li>
-                <li><a href="alarmas-activas.html" class="letras-nav">Alarmas</a></li>
-                <li><a href="user-page.html" class="letras-nav">Perfil</a></li>
-                <li><a href="index.html" class="airwatch">AIRWATCH</a></li>
-                <li><a href="user-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
+                <li><a href="admin-sensores.php" class="current">Monitoreo</a></li>
+                <li><a href="admin-alarmas.php" class="letras-nav">Alarmas</a></li>
+                <li><a href="admin-page.php" class="letras-nav">Perfil</a></li>
+                <li><a href="admin-page.php" class="airwatch">AIRWATCH</a></li>
+                <li><a href="admin-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
             </ul>
         </nav>
     </header>

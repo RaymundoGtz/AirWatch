@@ -81,11 +81,15 @@
 
         table, th, td {
             border: 1px solid black; /* Agrega bordes a las celdas */
+            font-family:'Inter',sans-serif;
+            color:white;
         }
 
         th, td {
             padding: 10px;
             text-align: center;
+            font-family:'Inter',sans-serif;
+            color:white;
         }
 
         th {
@@ -147,9 +151,7 @@
         .user-image {
             width: 40px; /* Ancho de la imagen */
             height: 40px; /* Alto de la imagen */
-            margin-left:700px;
-             /* Alinear verticalmente con el texto */
-        }
+            margin-left:700px;        }
 
         .letras-nav{
             vertical-align: middle;
@@ -162,6 +164,37 @@
             font-weight: bold;
             
         }
+
+        .right-column h1{
+            color:white;
+            font-family: 'Inter',sans-serif;
+            text-align:center;
+            font-size:35px;
+            font-weight:bold;
+            margin-bottom:70px;
+        }
+
+        
+        button {
+            border-radius: 15px;
+            border: 2px solid grey;;
+            color:white;
+            margin-top: 280px;
+            margin-right:150px;
+            margin-left:150px;
+            margin-bottom: 50px;
+            padding: 20px 50px;
+            cursor: pointer;
+            position: relative; /* Necesario para agregar un pseudo-elemento */
+            overflow: hidden; /* Ocultar el pseudo-elemento */
+            background-color:black;
+        }
+
+        button:hover{
+            border:2px solid white;
+        }
+
+
 
 
 
@@ -178,11 +211,11 @@
         <nav>
             <ul>
                 
-                <li><a href="sensores.html" class="current">Monitoreo</a></li>
-                <li><a href="alarmas-activas.html" class="letras-nav">Alarmas</a></li>
-                <li><a href="user-page.html" class="letras-nav">Perfil</a></li>
-                <li><a href="index.html" class="airwatch">AIRWATCH</a></li>
-                <li><a href="user-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
+                <li><a href="admin-sensores.php" class="current">Monitoreo</a></li>
+                <li><a href="admin-alarmas.php" class="letras-nav">Alarmas</a></li>
+                <li><a href="admin-page.php" class="letras-nav">Perfil</a></li>
+                <li><a href="admin-page.php" class="airwatch">AIRWATCH</a></li>
+                <li><a href="admin-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
             </ul>
         </nav>
     </header>
@@ -190,22 +223,15 @@
 
 
     <div class="page-content">
-        <div class="left-column">
-            <h4>MQ7</h4>
-            <h5 class="connected">Estado: Conectado<br><br>ID: 6HUHDE88</h5>
-
-
-            <h6>Si alguna informacion no es correcta, favor de contactarse con el administrador.<br>AIRWATCH no se hace responsable por fallas en el hardware o algun 
-tipo de malfuncionamiento. </h6>
-            
-        </div>
         <div class="right-column">
+            <h1>USUARIOS</h1>
             <div style="max-height: 800px; overflow-y: auto;">
                 <table border="1">
                     <tr>
-                        <th>ID</th>
-                        <th>PPM</th>
-                        <th>Fecha</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Correo</th>
                     </tr>
                     <?php
                     
@@ -220,55 +246,32 @@ tipo de malfuncionamiento. </h6>
                         die("Connection failed: " . mysqli_connect_error()); 
                     } 
     
-                    $sql = "SELECT * FROM mq7";
+                    $sql = "SELECT * FROM usuarios";
                     $result = $conn->query($sql);
     
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";  
-                            echo "<td>".$row["id"]."</td>";  
-                            echo "<td>".$row["ppm"]."</td>";  
-                            echo "<td>".$row["datetime"]."</td>";  
+                            echo "<td>".$row["nombre"]."</td>";  
+                            echo "<td>".$row["apellido"]."</td>";  
+                            echo "<td>".$row["edad"]."</td>";  
+                            echo "<td>".$row["correo"]."</td>";  
                             echo "</tr>";  
                         }
                     } else {
                         echo "0 results";
                     }
     
-                    if (isset($_POST["ppm"])) {
-                        echo "DATA SAVED";
-                        $p = $_POST["ppm"];
-    
-                        $sql = "INSERT INTO mq7 (ppm) VALUES (" . $p . ")";
-    
-                        if (mysqli_query($conn, $sql)) {
-                            echo "\nNew record created successfully";
-    
-                            // Obtener el ID del último registro insertado
-                            $last_id = mysqli_insert_id($conn);
-    
-                            // Consulta para obtener el valor PPM del último registro
-                            $sql = "SELECT ppm FROM mq7 WHERE id = $last_id";
-                            $result = $conn->query($sql);
-    
-                            if ($result->num_rows == 1) {
-                                $row = $result->fetch_assoc();
-                                $last_ppm = $row["ppm"];
-                                echo "<script>document.getElementById('ppm-value').textContent = 'PPM: " . $last_ppm . "';</script>";
-                            }
-                        } else {
-                            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                        }
-                    }
+                    
                     $conn->close();
                     ?>
-    
-    
-                    
-                </table>
+                </table><br>
             </div>
         </div>
+        <div>
+        <a href="editar-usuarios.php"><button>Editar Usuario</button></a>
     </div>
+
 </body>
 </html>
 

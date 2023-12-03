@@ -1,26 +1,26 @@
 <?php
-include("modelo/conexion_bd.php");
 
-$alerta = ""; // Inicializa la variable de alerta
+    include('modelo/conexion_bd.php');
 
-if (!empty($_POST["registro"])) {
-    if (empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["correo"]) || empty($_POST["clave"]) || empty($_POST["edad"])) {
-        $alerta = '<div class="alerta"> Uno de los campos está vacío</div>';
-    } else {
-        $nombre = $_POST["nombre"];
-        $apellido = $_POST["apellido"];
-        $edad = $_POST["edad"];
-        $correo = $_POST["correo"];
-        $clave = $_POST["clave"];
+    $alerta ="";
 
-        $sql = $conn->query("INSERT INTO usuarios(nombre, apellido, edad, correo, clave) VALUES('$nombre', '$apellido', '$edad', '$correo', '$clave')");
-        if ($sql == 1) {
-            header("Location: login.php");
+
+    if (!empty($_POST["alarma"])) {
+        if (empty($_POST["min"])  || empty($_POST["max"])) {
         } else {
-            $alerta = '<div class="alerta"> Error al registrar</div>';
+            $min = $_POST["min"];
+            $max = $_POST["max"];
+            
+            $sql = $conn->query("delete from alarmas");
+            $sql = $conn->query("INSERT INTO alarmas(valormax, valormin) VALUES('$max','$min')");
+            if ($sql == 1) {
+                $alerta = '<div class="alerta">Alarma creada correctamente</div>';
+            } else {
+                $alerta = '<div class="alerta">Alarma no creada</div>';
+            }
         }
     }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +139,6 @@ if (!empty($_POST["registro"])) {
             margin-left:50px;
         }
 
-        /* Restablece la visualización por defecto para los otros elementos */
         .edad, .correo, .clave, .cuenta {
             display: block;
             margin-right: 0; 
@@ -148,97 +147,50 @@ if (!empty($_POST["registro"])) {
 /*------------------------------------------------------------------ */
 
 
-        /* Estilo para el input "nombre" */
-
-        .nombre{
+        .min{
             margin-top:35px;
         }
 
 
-        .nombre input[type="text"] {
+        .min input[type="int"] {
             background-color: black;
             border: 2px solid #333;
             border-radius: 10px;
             padding: 10px; 
             font-size: 16px; 
             color: white; 
-            width: 100%; 
+            width: 5%; 
+            height:35px;
             margin-top: 5px;
         }
 
-        /* Estilo para la etiqueta "Apellido" */
 
 /*------------------------------------------------------------------ */
         
-        /* Estilo para el input "apellido" */
-        .apellido, .nombre, .edad, .correo,.clave{
+        .max, .min{
             font-family:'Inter',sans-serif;
             font-size:24px;
             color:white;
+            margin-left:250px;
         }
 
-        .apellido input[type="text"] {
+        .max input[type="int"] {
             background-color: black;
             border: 2px solid #333;
             border-radius: 10px;
             padding: 10px; 
             font-size: 16px; 
             color: white; 
-            width: 100%; 
+            width: 5%; 
+            height:35px;
             margin-top: 5px;
         }
 
-/*------------------------------------------------------------------ */
-
-        /* Estilo para el input "edad" */
-
-        .edad input[type="text"] {
-            background-color: black;
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 10px; 
-            font-size: 16px; 
-            color: white; 
-            margin-top: 5px;
-            padding-right:35px;
-            color:white;
-        }
-
-        .edad, .correo, .clave{
+        .max{
             margin-top:30px;
         }
 
-/*------------------------------------------------------------------ */
 
-        /* Estilo para el input "correo" */
-
-        .correo input[type="text"] {
-            background-color: black;
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 10px; 
-            font-size: 16px; 
-            
-            margin-top: 5px;
-            padding-right:306px;
-            color:white;
-        }
-
-
-/*------------------------------------------------------------------ */
-
-        /* Estilo para el input "clave" */
-
-        .clave input[type="password"] {
-            background-color: black;
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 10px; 
-            font-size: 16px; 
-            color: white; 
-            margin-top: 5px;
-            padding-right:35px;
-        }
 
 
 /*--------------Boton de inicio de sesion---------------------------- */
@@ -291,40 +243,27 @@ if (!empty($_POST["registro"])) {
     <header>
         <nav>
             <ul>  
-                <li><a href="index.html" class="airwatch">AIRWATCH</a></li>
+                <li><a href="admin-page.php" class="airwatch">AIRWATCH</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
         <form action="" method="post" class="formulario">
-            <h2 class="titulo">Crear nueva cuenta</h2>
+            <h2 class="titulo">Crear nueva alarma</h2>
             <h3><?php echo $alerta; // Mostrar el mensaje de alerta debajo del título ?></h3>
-            <a href="login.php" class="login">Ya eres miembro? Inicia Sesion</a>
             <?php?>
             <div class="padre">
-                <div class="nombre">
-                    <label for="nombre">Nombre</label><br>
-                    <input type="text" name= "nombre">
+                <div class="min">
+                    <label for="min">Valor Minimo</label><br>
+                    <input type="int" name= "min">
                 </div>
-                <div class="apellido">
-                    <label for="apellido">Apellido</label><br>
-                    <input type="text" name= "apellido">
-                </div>
-                <div class="edad">
-                    <label for="edad">Edad</label><br>
-                    <input type="text" name= "edad">
-                </div>
-                <div class="correo">
-                    <label for="correo">Correo</label><br>
-                    <input type="text" name= "correo">
-                </div>
-                <div class="clave">
-                    <label for="clave">Clave</label><br>
-                    <input type="password" name= "clave">
+                <div class="max">
+                    <label for="max">Valor Maximo</label><br>
+                    <input type="int" name= "max">
                 </div>
                 <div class="cuenta">
-                    <input class="boton" type="submit" value="Registrar Usuario" name="registro"><br>
+                    <input class="boton" type="submit" value="Crear Alarma" name="alarma"><br>
                 </div>
             </div>
         </form>

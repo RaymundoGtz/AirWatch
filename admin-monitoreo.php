@@ -180,9 +180,9 @@
                 
                 <li><a href="sensores.html" class="current">Monitoreo</a></li>
                 <li><a href="alarmas-activas.html" class="letras-nav">Alarmas</a></li>
-                <li><a href="user-page.html" class="letras-nav">Perfil</a></li>
+                <li><a href="admin-page.html" class="letras-nav">Perfil</a></li>
                 <li><a href="index.html" class="airwatch">AIRWATCH</a></li>
-                <li><a href="user-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
+                <li><a href="admin-page.php"><img src="img/usuarios.png" alt="Imagen de usuario" class="user-image"> </a>
             </ul>
         </nav>
     </header>
@@ -244,7 +244,7 @@ tipo de malfuncionamiento. </h6>
                         if (mysqli_query($conn, $sql)) {
                             echo "\nNew record created successfully";
     
-                            // Obtener el ID del último registro insertado
+                            // Obtén el ID del último registro insertado
                             $last_id = mysqli_insert_id($conn);
     
                             // Consulta para obtener el valor PPM del último registro
